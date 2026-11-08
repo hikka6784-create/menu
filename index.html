@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе "Бучер" — Меню</title>
+    <style>
+        :root {
+            --bg-color: #f7f3ed;
+            --card-bg: #ffffff;
+            --header-bg: #2b1d14;
+            --accent-color: #c0392b;
+            --accent-gold: #d35400;
+            --text-color: #2c2c2c;
+            --text-muted: #666666;
+            --border-color: #e6dfd5;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 40px; }
+        header { background-color: var(--header-bg); color: #fff; text-align: center; padding: 40px 20px; border-bottom: 4px solid var(--accent-gold); }
+        header h1 { font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; }
+        header p { color: #f39c12; margin-top: 5px; font-size: 1.1rem; }
+        .contacts { margin-top: 15px; font-size: 0.95rem; color: #d1cbc4; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .categories-nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; position: sticky; top: 0; background-color: var(--bg-color); padding: 15px 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .cat-btn { background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .cat-btn:hover, .cat-btn.active { background-color: var(--header-bg); color: #fff; border-color: var(--header-bg); }
+        .lunches-section { background: linear-gradient(135deg, #2b1d14, #3d271c); color: #fff; border-radius: 12px; padding: 25px; margin: 30px 0; box-shadow: 0 6px 20px rgba(43, 29, 20, 0.15); border-left: 5px solid var(--accent-gold); }
+        .lunches-header { text-align: center; margin-bottom: 20px; }
+        .lunches-header h2 { color: #f39c12; font-size: 2rem; text-transform: uppercase; }
+        .lunches-header .price-badge { display: inline-block; background-color: var(--accent-color); color: #fff; font-size: 1.3rem; font-weight: bold; padding: 5px 15px; border-radius: 20px; margin-top: 10px; }
+        .lunch-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .day-card { background-color: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 8px; border-left: 3px solid #f39c12; }
+        .day-card h4 { color: #f39c12; margin-bottom: 8px; text-transform: uppercase; font-size: 1rem; }
+        .day-card ul { list-style: none; font-size: 0.85rem; color: #e0d8cc; line-height: 1.5; }
+        .section-title { font-size: 1.6rem; color: var(--header-bg); margin: 40px 0 20px 0; padding-bottom: 8px; border-bottom: 2px solid var(--accent-gold); text-transform: uppercase; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .menu-item { background-color: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: transform 0.2s; }
+        .menu-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        .item-name { font-weight: bold; font-size: 1rem; color: var(--text-color); }
+        .item-price { font-weight: bold; color: var(--accent-color); white-space: nowrap; font-size: 1rem; }
+        .item-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
+        .item-weight { font-size: 0.75rem; color: #888; margin-top: 8px; }
+        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 40px; background-color: #f0eae1; }
+        .allergy-notice { color: var(--accent-color); font-style: italic; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Бучер</h1>
+        <p>Кафе & Гриль</p>
+        <div class="contacts">📍 м. Луцьк, просп. Молоді, 10-Г | 📞 095 076 10 04</div>
+    </header>
+    <div class="container">
+        <nav class="categories-nav">
+            <button class="cat-btn" onclick="scrollToSection('lunches')">Комплексні обіди</button>
+            <button class="cat-btn" onclick="scrollToSection('starters')">Холодні закуски</button>
+            <button class="cat-btn" onclick="scrollToSection('salads')">Салати</button>
+            <button class="cat-btn" onclick="scrollToSection('soups')">Перші страви</button>
+            <button class="cat-btn" onclick="scrollToSection('pans')">Пательні</button>
+            <button class="cat-btn" onclick="scrollToSection('hot-app')">Гарячі закуски</button>
+            <button class="cat-btn" onclick="scrollToSection('meat')">М'ясо & Птиця</button>
+            <button class="cat-btn" onclick="scrollToSection('fish')">Риба</button>
+            <button class="cat-btn" onclick="scrollToSection('sides')">Гарніри</button>
+            <button class="cat-btn" onclick="scrollToSection('desserts')">Десерти</button>
+            <button class="cat-btn" onclick="scrollToSection('beer-snack')">До пива</button>
+            <button class="cat-btn" onclick="scrollToSection('bar')">Бар & Напої</button>
+        </nav>
+        <section id="lunches" class="lunches-section">
+            <div class="lunches-header">
+                <h2>Комплексні Обіди</h2>
+                <p style="color: #f0eae1; margin-top: 5px;">Подаємо з 12:00 до 15:00[cite: 5]</p>
+                <div class="price-badge">158 грн[cite: 5]</div>
+            </div>
+            <div class="lunch-days">
+                <div class="day-card">
+                    <h4>Понеділок</h4>
+                    <ul>
+                        <li>Борщ український[cite: 5]</li>
+                        <li>Бефстроганов[cite: 5]</li>
+                        <li>Салат[cite: 5]</li>
+                        <li>Хліб, Узвар[cite: 5]</li>
+                    </ul>
+                </div>
+                <div class="day-card">
+                    <h4>Вівторок</h4>
+                    <ul>
+                        <li>Бульйон курячий з локшиною[cite: 5]</li>
+                        <li>Котлети[cite: 5]</li>
+                        <li>Пюре картопляне[cite: 5]</li>
+                        <li>Салат, Хліб, Узвар[cite: 5]</li>
+                    </ul>
+                </div>
+                <div class="day-card">
+                    <h4>Середа</h4>
+                    <ul>
+                        <li>Капусник[cite: 5]</li>
+                        <li>Тефтелі[cite: 5]</li>
+                        <li>Каша гречана[cite: 5]</li>
+                        <li>Салат, Хліб, Узвар[cite: 5]</li>
+                    </ul>
+                </div>
+                <div class="day-card">
+                    <h4>Четвер</h4>
+                    <ul>
+                        <li>Суп гороховий з грінками[cite: 5]</li>
+                        <li>Відбивна куряча[cite: 5]</li>
+                        <li>Картопля тушкована з грибами[cite: 5]</li>
+                        <li>Салат, Хліб, Узвар[cite: 5]</li>
+                    </ul>
+                </div>
+                <div class="day-card">
+                    <h4>П'ятниця</h4>
+                    <ul>
+                        <li>Суп з фрикадельками[cite: 5]</li>
+                        <li>Плов з м'ясом[cite: 5]</li>
+                        <li>Салат, Хліб, Узвар[cite: 5]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <h2 id="starters" class="section-title">Холодні закуски</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">М'ясне асорті «Домашнє»</span><span class="item-price">365 грн</span></div><div class="item-weight">Вихід: 300/50 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Сирне асорті / мед</span><span class="item-price">186 грн</span></div><div class="item-weight">Вихід: 200/30 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Овочеве асорті</span><span class="item-price">158 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Закуска з язика «Базіка»</span><span class="item-price">184 грн</span></div><div class="item-weight">Вихід: 120/50 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Закуска «Святкова»</span><span class="item-price">225 грн</span></div><div class="item-desc">Куряче філе, ананас, сир, горіхи грецькі, заправка</div><div class="item-weight">Вихід: 250 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Оселедець з цибулею</span><span class="item-price">142 грн</span></div><div class="item-weight">Вихід: 180 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Плато-асорті з салом, часником та огірками</span><span class="item-price">185 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Закуска з помідорами під сиром</span><span class="item-price">131 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Закуска «Арарат»</span><span class="item-price">233 грн</span></div><div class="item-desc">Бастурма, помідори, зелень</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Соління домашні</span><span class="item-price">155 грн</span></div><div class="item-weight">Вихід: 480 г[cite: 4]</div></div>
+        </div>
+
+        <h2 id="salads" class="section-title">Салати</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат з куркою та перцем (теплий)</span><span class="item-price">189 грн</span></div><div class="item-desc">Курятина, перець болг. гриль, помідори, листя салату, фета, заправка</div><div class="item-weight">Вихід: 250 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Кучерявий»</span><span class="item-price">198 грн</span></div><div class="item-desc">Шинка печена, капуста, морква, огірок св., яйця перепелині, гриби мариновані, заправка</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Зозулька»</span><span class="item-price">174 грн</span></div><div class="item-desc">Шинка печена, капуста, морква, огірок св. тв., яйце, заправка</div><div class="item-weight">Вихід: 220 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Ситний»</span><span class="item-price">178 грн</span></div><div class="item-desc">Курятина, гриби св., помідори, цибуля</div><div class="item-weight">Вихід: 250 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат Цезар з курятиною</span><span class="item-price">196 грн</span></div><div class="item-desc">Листя салату, куряче філе, крутони, яйце перепелине, помідор, пармезан</div><div class="item-weight">Вихід: 220 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат Цезар з сьомгою</span><span class="item-price">225 грн</span></div><div class="item-desc">Листя салату, сьомга слабосолена, крутони, яйце перепелине, помідор, пармезан</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Каприз»</span><span class="item-price">155 грн</span></div><div class="item-desc">Два вида капусти, куряче філе копч., помідори, грінки, заправка</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Улюблений»</span><span class="item-price">166 грн</span></div><div class="item-desc">Зелень, буряк, печінка куряча, сир Фета, заправка</div><div class="item-weight">Вихід: 220 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат «Мужик»</span><span class="item-price">254 грн</span></div><div class="item-desc">Бочок копч. смаж., помідори, печериці смажені, картопля, яйця, корнішони, цибуля</div><div class="item-weight">Вихід: 300 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат Аля Олів'є</span><span class="item-price">156 грн</span></div><div class="item-desc">Овочі відварні, шинка печена, майонезна заправка</div><div class="item-weight">Вихід: 250 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат Грецький</span><span class="item-price">183 грн</span></div><div class="item-desc">Помідор, огірок, перець болг., маслини, сир Фета, заправка</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат Вітамін</span><span class="item-price">112 грн</span></div><div class="item-desc">Огірок, помідор, перець болг., капуста, цибуля</div><div class="item-weight">Вихід: 230 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Овочевий мікс з селерою</span><span class="item-price">110 грн</span></div><div class="item-desc">Капуста, морква, буряк, яблуко, селера, кукурудза</div><div class="item-weight">Вихід: 230 г[cite: 4]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Салат овочевий з язиком</span><span class="item-price">152 грн</span></div><div class="item-desc">Листя салату, перець болг., помідори, огірки св., капуста, язик</div><div class="item-weight">Вихід: 200 г[cite: 4]</div></div>
+        </div>
+
+        <h2 id="soups" class="section-title">Перші страви</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Борщ Український</span><span class="item-price">90 грн</span></div><div class="item-desc">Подається з намазкою з салом[cite: 3]</div><div class="item-weight">Вихід: 300/40 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Курячий бульйон з домашньою лапшою</span><span class="item-price">112 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Солянка</span><span class="item-price">125 грн</span></div><div class="item-weight">Вихід: 300/30 г[cite: 3]</div></div>
+        </div>
+
+        <h2 id="pans" class="section-title">Пательні</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пательня «Козацька розвага» на дощці</span><span class="item-price">486 грн</span></div><div class="item-desc">Свинина смаж., бочок смаж., картопля, капуста кваш., соус[cite: 3]</div><div class="item-weight">Вихід: 850 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пательня «Велетенська» на дощці</span><span class="item-price">480 грн</span></div><div class="item-desc">Ковб. гриль, ковб. мисливські, картопля, огірочки, соус[cite: 3]</div><div class="item-weight">Вихід: 1050 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пательня «Весела компанія»</span><span class="item-price">295 грн</span></div><div class="item-desc">Картопля смажена, свинина, перець болг., цибуля, яйця курячі, зелень[cite: 3]</div><div class="item-weight">Вихід: 600/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пательня «Козацька»</span><span class="item-price">280 грн</span></div><div class="item-desc">Ковб. мисл., свинина, цибуля, перець болг., картопля[cite: 3]</div><div class="item-weight">Вихід: 500 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пательня «Смачна»</span><span class="item-price">280 грн</span></div><div class="item-desc">Свинина, печериці, цибуля, картопля, квасоля, зелень[cite: 3]</div><div class="item-weight">Вихід: 500 г[cite: 3]</div></div>
+        </div>
+
+        <h2 id="hot-app" class="section-title">Гарячі закуски</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Печінка тушкована з грибами</span><span class="item-price">133 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Деруни зі шкварками, сиром Фета та сметаною</span><span class="item-price">132 грн</span></div><div class="item-weight">Вихід: 230/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Деруни по-селянськи з куркою та грибами (в горщику)</span><span class="item-price">150 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Деруни з м'ясом</span><span class="item-price">148 грн</span></div><div class="item-weight">Вихід: 230/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Вареники з картоплею та копченим бочком</span><span class="item-price">98 грн</span></div><div class="item-weight">Вихід: 200/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Вареники з капустою та грибною піджаркою</span><span class="item-price">88 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пельмені в грибному соусі (в горщику)</span><span class="item-price">138 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пельмені з маслом</span><span class="item-price">115 грн</span></div><div class="item-weight">Вихід: 200/20 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з м'ясом</span><span class="item-price">125 грн</span></div><div class="item-weight">Вихід: 150 г (3 шт)[cite: 3]</div></div>
+        </div>
+
+        <h2 id="meat" class="section-title">М'ясні страви (Курятина & Свинина)</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Курочка з помідорами під сиром</span><span class="item-price">156 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Курочка з овочами під вершковим соусом</span><span class="item-price">180 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Курячі крильця хрусткі</span><span class="item-price">184 грн</span></div><div class="item-weight">Вихід: 230/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Медальйони зі свинини з болгарським перцем</span><span class="item-price">235 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Стейк в медово-гірчичному соусі</span><span class="item-price">195 грн</span></div><div class="item-weight">Вихід: 130/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Свинина Калейдоскоп з овочами</span><span class="item-price">169 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Смаженина по-домашньому</span><span class="item-price">188 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Соте зі свинини</span><span class="item-price">159 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Печеня по-селянськи (в горщику)</span><span class="item-price">156 грн</span></div><div class="item-weight">Вихід: 300 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Відбивна Дует з сиром</span><span class="item-price">189 грн</span></div><div class="item-weight">Вихід: 160 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Відбивна Сюрприз з грибами</span><span class="item-price">185 грн</span></div><div class="item-weight">Вихід: 160 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Рулька Апетитна в гірчично-медовому соусі</span><span class="item-price">59 грн</span></div><div class="item-desc">Вагова — ціна за 100 г[cite: 3]</div><div class="item-weight">Вихід: вагова[cite: 3]</div></div>
+        </div>
+
+        <h2 id="fish" class="section-title">Риба та Гарніри</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пікантне філе хека з сиром</span><span class="item-price">180 грн</span></div><div class="item-weight">Вихід: 220 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Філе хека з овочами</span><span class="item-price">167 грн</span></div><div class="item-weight">Вихід: 220 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Короп смажений у фритюрі</span><span class="item-price">233 грн</span></div><div class="item-weight">Вихід: 180 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Хрумкі карасики</span><span class="item-price">168 грн</span></div><div class="item-weight">Вихід: 140/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Картопля запечена з бочком</span><span class="item-price">105 грн</span></div><div class="item-weight">Вихід: 280 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Картопля фрі (з сиром)</span><span class="item-price">108 грн</span></div><div class="item-weight">Вихід: 230/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Картопля смажена по-домашньому</span><span class="item-price">72 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Крокики зі сметанковим соусом</span><span class="item-price">83 грн</span></div><div class="item-weight">Вихід: 250/50 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Рис з овочами</span><span class="item-price">105 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Овочі тушковані під вершковим соусом</span><span class="item-price">138 грн</span></div><div class="item-weight">Вихід: 230 г[cite: 3]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Домашня лапша з сиром та грибами</span><span class="item-price">120 грн</span></div><div class="item-weight">Вихід: 250 г[cite: 3]</div></div>
+        </div>
+
+        <h2 id="desserts" class="section-title">Десерти</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з яблуками</span><span class="item-price">115 грн</span></div><div class="item-weight">Вихід: 200 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з маком та горіхами</span><span class="item-price">115 грн</span></div><div class="item-weight">Вихід: 200 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з вишнею</span><span class="item-price">126 грн</span></div><div class="item-weight">Вихід: 200 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з бананом</span><span class="item-price">115 грн</span></div><div class="item-weight">Вихід: 200 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Млинці з сиром та родзинками</span><span class="item-price">115 грн</span></div><div class="item-weight">Вихід: 200 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Морозиво з фруктами</span><span class="item-price">95 грн</span></div><div class="item-weight">Вихід: 120 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Морозиво з шоколадним топінгом та горіхами</span><span class="item-price">90 грн</span></div><div class="item-weight">Вихід: 80/30 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Морозиво з фруктовим сиропом</span><span class="item-price">85 грн</span></div><div class="item-weight">Вихід: 80/20 г[cite: 2]</div></div>
+        </div>
+
+        <h2 id="beer-snack" class="section-title">До пива</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">«Горобчики під сиром» (смажені пельмені та сир)</span><span class="item-price">125 грн</span></div><div class="item-weight">Вихід: 190 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пивна тарілка</span><span class="item-price">195 грн</span></div><div class="item-desc">Сир Чечель, сир Фета, бастурма, солоні горішки, сухарики[cite: 2]</div><div class="item-weight">Вихід: 150 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пивна тарілка «Гурман»</span><span class="item-price">233 грн</span></div><div class="item-desc">Асорті сиров'яленого м'яса, сир Чечель[cite: 2]</div><div class="item-weight">Вихід: 120 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Сир Чечель запечений</span><span class="item-price">118 грн</span></div><div class="item-weight">Вихід: 60 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Свинячі вушка</span><span class="item-price">99 грн</span></div><div class="item-weight">Вихід: 100 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Бастурма</span><span class="item-price">140 грн</span></div><div class="item-weight">Вихід: 50 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Чіпси фірмові</span><span class="item-price">70 грн</span></div><div class="item-weight">Вихід: 50/50 г[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Арахіс смажений</span><span class="item-price">70 грн</span></div><div class="item-weight">Вихід: 100 г[cite: 2]</div></div>
+        </div>
+
+        <h2 id="bar" class="section-title">Бар та Напої</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="item-header"><span class="item-name">Авторське напівтемне розливне</span><span class="item-price">50 / 88 грн</span></div><div class="item-weight">0.3л / 0.5л[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Земан нефільтроване розливне</span><span class="item-price">32 / 50 грн</span></div><div class="item-weight">0.3л / 0.5л[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Опілля світле розливне</span><span class="item-price">30 / 48 грн</span></div><div class="item-weight">0.3л / 0.5л[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пиво Кроненбург 1664</span><span class="item-price">110 грн</span></div><div class="item-weight">пляшка 0.46 л[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пиво БЕЗАЛКОГОЛЬНЕ</span><span class="item-price">85 грн</span></div><div class="item-weight">пляшка 0.45 л[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Горілка Nemiroff Де Люкс</span><span class="item-price">48 / 96 / 480 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Горілка Nemiroff Original / Українська з перцем</span><span class="item-price">32 / 64 / 320 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Козацька Рада / Українська душа</span><span class="item-price">32 / 64 / 320 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Zubrowka (Biala / Bizon Grass / Zlota)</span><span class="item-price">36 / 72 / 360 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Арарат 5* (Бренді)</span><span class="item-price">110 / 220 / 1100 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Старий Кахеті 3*</span><span class="item-price">63 / 126 / 630 грн</span></div><div class="item-weight">50г / 100г / 1л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Віскі Джемесон</span><span class="item-price">120 / 240 грн</span></div><div class="item-weight">50г / 100г[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Ром Капітан Морган Spiced Gold</span><span class="item-price">75 / 150 грн</span></div><div class="item-weight">50г / 100г[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Текіла Ольмека срібна</span><span class="item-price">120 / 240 грн</span></div><div class="item-weight">50г / 100г[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Самбука / Старий Таллінн</span><span class="item-price">80 / 160 грн</span></div><div class="item-weight">50г / 100г[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Prosecco DOC Spumante Extra Dry</span><span class="item-price">620 грн</span></div><div class="item-weight">пляшка 0.75 л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Артемівське / Фраголіно</span><span class="item-price">480 / 360 грн</span></div><div class="item-weight">пляшка 0.75 л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Вина Грузії (Алазанська долина, Сапераві, Цинандалі)</span><span class="item-price">60 / 450 грн</span></div><div class="item-weight">100г / 0.75л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Кіндзмараулі (червоне напівсолодке)</span><span class="item-price">80 / 600 грн</span></div><div class="item-weight">100г / 0.75л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Вина Іспанія (Tierra Eden)</span><span class="item-price">48 / 360 грн</span></div><div class="item-weight">100г / 0.75л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Еспресо / Американо</span><span class="item-price">45 грн</span></div><div class="item-weight">30 мл / 90 мл[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Капучино</span><span class="item-price">55 грн</span></div><div class="item-weight">120 мл[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Латте / Какао</span><span class="item-price">60 грн</span></div><div class="item-weight">200 мл[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Чай в асортименті / м'ятний / імбирний</span><span class="item-price">55 грн</span></div><div class="item-weight">300 мл[cite: 2]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Соки фреш (апельсиновий / яблучно-морквяний)</span><span class="item-price">90 / 70 грн</span></div><div class="item-weight">200 мл[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Сік в асортименті / Узвар</span><span class="item-price">60 / 100 грн</span></div><div class="item-weight">0.3 л / 1.0 л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Лимонад скло / Йоданка скло</span><span class="item-price">60 / 58 грн</span></div><div class="item-weight">0.5 л[cite: 1]</div></div>
+            <div class="menu-item"><div class="item-header"><span class="item-name">Пепсі (скло / ПЕТ)</span><span class="item-price">60 / 65 грн</span></div><div class="item-weight">0.33 л / 0.5 л[cite: 1]</div></div>
+        </div>
+    </div>
+    <footer>
+        <p class="allergy-notice">* Просимо попереджати офіціанта про алергію на ті чи інші продукти![cite: 2, 3, 4]</p>
+        <p>З об'єктивних причин в асортименті можливі зміни. Актуальну інформацію уточнюйте в офіціанта.[cite: 1, 2]</p>
+        <p style="margin-top: 15px;">© Кафе «Бучер»</p>
+    </footer>
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if(element) { element.scrollIntoView({ behavior: 'smooth' }); }
+        }
+    </script>
+</body>
+</html>
